@@ -1,0 +1,14 @@
+# Ignore artifacts:
+build
+coverage
+
+# Build directories
+dist/
+build/
+
+# Dependencies
+node_modules/
+
+# Local configuration or logs
+.env
+*.log
