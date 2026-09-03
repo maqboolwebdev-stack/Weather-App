@@ -1,6 +1,32 @@
-/* styles.css */
 body {
-  background-color: rebeccapurple;
-  color: white;
-  text-align: center;
+    min-height: 100dvh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    height: 5rem;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container {
+    border: 1px solid red;
+    display: flex;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.search-field {
+    border-radius: 2px;
+    border: 1px solid gray;
+}
+
+main {
+    width: 80vw;
+    border: 1px solid red;
+    height: 80vh;
 }
