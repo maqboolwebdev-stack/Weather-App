@@ -5,6 +5,7 @@ async function getWeather(location) {
     const API_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?key=${API_KEY}&unitGroup=metric&contentType=json`;
     const response = await fetch(API_URL);
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error("Problem with fetching data:", error);
@@ -12,28 +13,36 @@ async function getWeather(location) {
 }
 
 function filterData(rawData) {
-    const temperature = rawData.days[0].temp;
-    const conditions = rawData.days[0].conditions;
-    const description = rawData.days[0].description;
-    const dateTime = rawData.days[0].datetime;
-    const humidity = rawData.days[0].humidity;
-    const perception = rawData.days[0].precip;
-    const windSpeed = rawData.days[0].windspeed;
-    const resolveAddress = rawData.resolvedAddress;
+  const temperature = rawData.days[0].temp;
+  const conditions = rawData.days[0].conditions;
+  const description = rawData.days[0].description;
+  const dateTime = rawData.days[0].datetime;
+  const humidity = rawData.days[0].humidity;
+  const perception = rawData.days[0].precip;
+  const windSpeed = rawData.days[0].windspeed;
+  const resolveAddress = rawData.resolvedAddress;
+  const feelsLike = rawData.currentConditions.feelslike;
 
-
-    return {temperature, conditions, description, dateTime, humidity, perception, windSpeed, resolveAddress};
+  return {
+    temperature,
+    conditions,
+    description,
+    dateTime,
+    humidity,
+    perception,
+    windSpeed,
+    resolveAddress,
+    feelsLike
+  };
 }
 
+const input = document.querySelector("input");
+const searchBtn = document.querySelector("button");
 
+searchBtn.addEventListener("click", function (e) {
+  e.preventDefault();
 
-const input = document.querySelector('input');
-const searchBtn = document.querySelector('button');
-
-searchBtn.addEventListener('click', function() {
-
-    getWeather(input.value).then((rawData) => {
-
+  getWeather(input.value).then((rawData) => {
     const cleanWeather = filterData(rawData);
 
     console.log(cleanWeather.temperature);
@@ -44,8 +53,8 @@ searchBtn.addEventListener('click', function() {
     console.log(cleanWeather.perception);
     console.log(cleanWeather.windSpeed);
     console.log(cleanWeather.resolveAddress);
+    console.log(cleanWeather.feelsLike);
+  });
 
+  input.value = ''
 });
-
-})
-
