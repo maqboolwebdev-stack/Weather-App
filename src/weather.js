@@ -5,7 +5,6 @@ async function getWeather(location) {
     const API_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?key=${API_KEY}&unitGroup=metric&contentType=json`;
     const response = await fetch(API_URL);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Problem with fetching data:", error);
@@ -36,25 +35,5 @@ function filterData(rawData) {
   };
 }
 
-const input = document.querySelector("input");
-const searchBtn = document.querySelector("button");
 
-searchBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-
-  getWeather(input.value).then((rawData) => {
-    const cleanWeather = filterData(rawData);
-
-    console.log(cleanWeather.temperature);
-    console.log(cleanWeather.conditions);
-    console.log(cleanWeather.description);
-    console.log(cleanWeather.dateTime);
-    console.log(cleanWeather.humidity);
-    console.log(cleanWeather.perception);
-    console.log(cleanWeather.windSpeed);
-    console.log(cleanWeather.resolveAddress);
-    console.log(cleanWeather.feelsLike);
-  });
-
-  input.value = ''
-});
+export {getWeather, filterData};
