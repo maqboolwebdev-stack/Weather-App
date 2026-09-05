@@ -1,0 +1,76 @@
+export function renderWeatherCard(data) {
+  const mainContainer = document.querySelector("main");
+
+  mainContainer.innerHTML = "";
+
+  const weatherCard = document.createElement("div");
+  weatherCard.className = "weather-card";
+
+  const cardHeader = document.createElement("div");
+  cardHeader.className = "card-header";
+
+  const locationH1 = document.createElement("h1");
+  locationH1.className = "location";
+  locationH1.textContent = data.resolveAddress;
+
+  const dateTimeP = document.createElement("p");
+  dateTimeP.className = "date-time";
+  dateTimeP.textContent = data.dateTime;
+
+  const feelsLikeP = document.createElement("p");
+  feelsLikeP.className = "feels-like";
+  feelsLikeP.textContent = `Feels like ${data.feelsLike}°`;
+
+  cardHeader.appendChild(locationH1);
+  cardHeader.appendChild(dateTimeP);
+  cardHeader.appendChild(feelsLikeP);
+
+  const cardMain = document.createElement("div");
+  cardMain.className = "card-main";
+
+  const tempH2 = document.createElement("h2");
+  tempH2.className = "temperature";
+  tempH2.textContent = `${data.temperature}°C`;
+
+  const conditionP = document.createElement("p");
+  conditionP.className = "condition";
+  conditionP.textContent = data.conditions;
+
+  const descP = document.createElement("p");
+  descP.className = "description";
+  descP.textContent = data.description;
+
+  cardMain.appendChild(tempH2);
+  cardMain.appendChild(conditionP);
+  cardMain.appendChild(descP);
+
+  const cardDetails = document.createElement("div");
+  cardDetails.className = "card-details";
+
+  function createDetailItem(label, value) {
+    const detailItem = document.createElement("div");
+    detailItem.className = "detail-item";
+
+    const detailLabel = document.createElement("span");
+    detailLabel.className = "detail-label";
+    detailLabel.textContent = label;
+
+    const detailValue = document.createElement("span");
+    detailValue.className = "detail-value";
+    detailValue.textContent = value;
+
+    detailItem.appendChild(detailLabel);
+    detailItem.appendChild(detailValue);
+    return detailItem;
+  }
+
+  cardDetails.appendChild(createDetailItem("Humidity", `${data.humidity}%`));
+  cardDetails.appendChild(createDetailItem("Precipitation", `${data.perception}%`));
+  cardDetails.appendChild(createDetailItem("Wind Speed", `${data.windSpeed} km/h`));
+
+  weatherCard.appendChild(cardHeader);
+  weatherCard.appendChild(cardMain);
+  weatherCard.appendChild(cardDetails);
+
+  mainContainer.appendChild(weatherCard);
+}
