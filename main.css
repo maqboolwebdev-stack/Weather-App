@@ -1,0 +1,186 @@
+body {
+    min-height: 100dvh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* background-color: lightblue; */
+}
+
+header {
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-field {
+    border-radius: 2px;
+    border: 1px solid gray;
+    padding-left: .5rem;
+
+}
+
+.search-field:focus {
+    outline: none;
+    border: 1px solid green;
+}
+
+.search-btn {
+    cursor: pointer;
+    border: 1px solid gray;
+    background-color: #fff;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+.search-btn:hover {
+    color: green;
+    border: 1px solid green;
+}
+
+.search-btn:active {
+    opacity: .80;
+}
+
+ /*  CSS RESET */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.weather-card {
+  width: 100%;
+  max-width: 22rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card-header {
+  text-align: center;
+}
+
+.location {
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+}
+
+.feels-like {
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  opacity: 0.85;
+  margin-top: 0.25rem;
+}
+
+.date-time {
+  font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+  margin-top: 0.15rem;
+  opacity: 0.8;
+}
+
+.card-main {
+  text-align: center;
+}
+
+.temperature {
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+}
+
+.condition {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.description {
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  opacity: 0.8;
+  margin-top: 0.25rem;
+}
+
+.card-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  border-top: 1px solid gray;
+  padding-top: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+  opacity: 0.75;
+}
+
+.detail-value {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 600;
+}
+
+@media (max-width: 22rem) {
+  .card-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
