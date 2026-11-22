@@ -5,6 +5,11 @@ const themeToggle = document.querySelector(".theme-toggle");
 const themeIcon = themeToggle.querySelector(".theme-toggle-icon");
 const storageKey = "weather-app-theme";
 
+function getLocalTimeTheme() {
+  const hour = new Date().getHours();
+  return hour >= 6 && hour < 18 ? "light" : "dark";
+}
+
 function applyTheme(theme) {
   const isDark = theme === "dark";
   document.documentElement.dataset.theme = theme;
@@ -23,11 +28,25 @@ try {
   console.error("Could not read the saved theme preference.", error);
 }
 
-let currentTheme = savedTheme === "dark" ? "dark" : "light";
+let hasUserPreference = savedTheme === "dark" || savedTheme === "light";
+let currentTheme = hasUserPreference ? savedTheme : getLocalTimeTheme();
 applyTheme(currentTheme);
+
+export function setAutomaticThemeFromSunTimes(sunriseEpoch, sunsetEpoch) {
+  if (hasUserPreference) return;
+
+  const sunrise = Number(sunriseEpoch);
+  const sunset = Number(sunsetEpoch);
+  if (!Number.isFinite(sunrise) || !Number.isFinite(sunset)) return;
+
+  const now = Date.now() / 1000;
+  currentTheme = now < sunrise || now >= sunset ? "dark" : "light";
+  applyTheme(currentTheme);
+}
 
 themeToggle.addEventListener("click", (event) => {
   currentTheme = currentTheme === "dark" ? "light" : "dark";
+  hasUserPreference = true;
 
   try {
     localStorage.setItem(storageKey, currentTheme);

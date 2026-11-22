@@ -4,6 +4,7 @@ import {
   renderLoading,
   renderError,
 } from "./render-weather-card.js";
+import { setAutomaticThemeFromSunTimes } from "./theme.js";
 
 const input = document.querySelector("input");
 const searchBtn = document.querySelector("button");
@@ -27,12 +28,22 @@ async function showWeather(
   location,
   requestId = ++activeRequest,
   locationName,
+  useLocationSunTimes = false,
 ) {
   renderLoading();
 
   try {
     const rawData = await getWeather(location);
     if (requestId !== activeRequest) return;
+
+    if (useLocationSunTimes) {
+      const currentConditions = rawData.currentConditions || {};
+      const currentDay = rawData.days[0] || {};
+      setAutomaticThemeFromSunTimes(
+        currentConditions.sunriseEpoch ?? currentDay.sunriseEpoch,
+        currentConditions.sunsetEpoch ?? currentDay.sunsetEpoch,
+      );
+    }
 
     renderWeatherCard(
       filterData(rawData, locationName),
@@ -51,6 +62,7 @@ async function loadInitialWeather() {
 
   let location;
   let locationName;
+  let useLocationSunTimes = false;
   if (navigator.geolocation) {
     try {
       const position = await new Promise((resolve, reject) => {
@@ -62,6 +74,7 @@ async function loadInitialWeather() {
       if (requestId !== activeRequest) return;
       const { latitude, longitude } = position.coords;
       location = `${latitude},${longitude}`;
+      useLocationSunTimes = true;
 
       try {
         const response = await fetch(
@@ -102,7 +115,7 @@ async function loadInitialWeather() {
   }
 
   if (requestId === activeRequest) {
-    await showWeather(location, requestId, locationName);
+    await showWeather(location, requestId, locationName, useLocationSunTimes);
   }
 }
 
