@@ -3,3 +3,4 @@ import "./css-reset.css";
 import "./weather.js";
 import "./weather.css";
 import "./display.js";
+import "./theme.js";

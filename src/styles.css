@@ -1,6 +1,66 @@
+:root {
+    color-scheme: light;
+    --page-background: hsl(220 14% 96%);
+    --surface-background: hsl(0 0% 100%);
+    --text-color: hsl(221 39% 11%);
+    --muted-color: hsl(220 9% 46%);
+    --border-color: hsl(218 11% 65%);
+    --accent-color: hsl(143 72% 29%);
+    --error-color: hsl(0 100% 33%);
+    --icon-filter: none;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --page-background: hsl(221 39% 11%);
+    --surface-background: hsl(215 28% 17%);
+    --text-color: hsl(210 20% 98%);
+    --muted-color: hsl(214 14% 84%);
+    --border-color: hsl(220 9% 46%);
+    --accent-color: hsl(142 69% 58%);
+    --error-color: hsl(0 93% 82%);
+    --icon-filter: invert(1);
+}
+
 body {
     min-height: 100dvh;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: var(--page-background);
+    color: var(--text-color);
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 2;
+    clip-path: circle(
+        0 at var(--theme-transition-x, 50%) var(--theme-transition-y, 50%)
+    );
+    animation: theme-reveal 650ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes theme-reveal {
+    to {
+        clip-path: circle(
+            var(--theme-transition-radius, 150vmax)
+                at var(--theme-transition-x, 50%) var(--theme-transition-y, 50%)
+        );
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body {
+        transition: none;
+    }
 }
 
 header {
@@ -20,27 +80,30 @@ header {
 
 .search-field {
     border-radius: 2px;
-    border: 1px solid gray;
+    border: 1px solid var(--border-color);
     padding-left: .5rem;
+    background-color: var(--surface-background);
+    color: var(--text-color);
 
 }
 
 .search-field:focus {
     outline: none;
-    border: 1px solid green;
+    border: 1px solid var(--accent-color);
 }
 
 .search-btn {
     cursor: pointer;
-    border: 1px solid gray;
-    background-color: #fff;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-background);
+    color: var(--text-color);
     padding-left: .5rem;
     padding-right: .5rem;
 }
 
 .search-btn:hover {
-    color: green;
-    border: 1px solid green;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
 }
 
 .search-btn:active {
@@ -50,4 +113,27 @@ header {
 .search-btn:disabled {
     cursor: wait;
     opacity: 0.6;
+}
+
+.theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0.35rem;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    background-color: var(--surface-background);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent-color);
+}
+
+.theme-toggle-icon {
+    width: 100%;
+    height: 100%;
+    filter: var(--icon-filter);
 }
