@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="0.55" stop-color="#edf5fa"/>
+      <stop offset="1" stop-color="#e4eff5"/>
+    </linearGradient>
+    <radialGradient id="sun-glow">
+      <stop offset="0" stop-color="#f7cf72" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#f7cf72" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="horizon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dcecf2" stop-opacity="0"/>
+      <stop offset="1" stop-color="#dcecf2" stop-opacity=".6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <circle cx="1270" cy="145" r="290" fill="url(#sun-glow)"/>
+  <g fill="none" stroke="#88aebe" stroke-linecap="round" opacity=".22">
+    <path d="M75 175c95-38 176-38 251 0m-222 35c66-24 123-24 174 0" stroke-width="2"/>
+    <path d="M1250 360c95-38 176-38 251 0m-222 35c66-24 123-24 174 0" stroke-width="2"/>
+  </g>
+  <g fill="#fff" stroke="#b8d0dc" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".48">
+    <path d="M125 305h178a55 55 0 0 0 0-110 77 77 0 0 0-147-14 62 62 0 0 0-31 124Z"/>
+    <path d="M1240 570h183a57 57 0 0 0 0-114 80 80 0 0 0-153-15 64 64 0 0 0-30 129Z"/>
+  </g>
+  <g transform="translate(1270 145)" fill="none" stroke="#d8a947" stroke-linecap="round" opacity=".38">
+    <circle r="49" fill="#f3c866" fill-opacity=".52" stroke="none"/>
+    <circle r="66" stroke-width="2"/>
+    <path d="M0-91v-16m0 198v-16m91-75h16m-198 0h16m-96-64 12 12m140 140 12 12m0-164-12 12M-78 78l-12 12" stroke-width="3"/>
+  </g>
+  <g fill="none" stroke="#91b7c8" stroke-linecap="round" opacity=".24">
+    <path d="M80 690c158-58 290-58 396 0m-332 43c100-35 183-35 249 0" stroke-width="3"/>
+    <path d="M1110 820c158-58 290-58 396 0m-332 43c100-35 183-35 249 0" stroke-width="3"/>
+  </g>
+  <path d="M0 850c212-88 403-66 589-10 173 52 326 58 493-2 193-69 351-53 518 17v145H0Z" fill="url(#horizon)"/>
+</svg>

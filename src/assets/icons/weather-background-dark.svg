@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#101b2c"/>
+      <stop offset=".55" stop-color="#17283a"/>
+      <stop offset="1" stop-color="#203749"/>
+    </linearGradient>
+    <radialGradient id="moon-glow">
+      <stop offset="0" stop-color="#a8c9dc" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#a8c9dc" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="horizon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#28485b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#28485b" stop-opacity=".7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <circle cx="1270" cy="145" r="290" fill="url(#moon-glow)"/>
+  <g fill="#d4e5ef" opacity=".55">
+    <circle cx="1090" cy="105" r="3"/>
+    <circle cx="1435" cy="92" r="2.5"/>
+    <circle cx="1378" cy="250" r="3"/>
+    <circle cx="1195" cy="282" r="2"/>
+    <circle cx="1510" cy="190" r="2"/>
+    <circle cx="1010" cy="215" r="2"/>
+  </g>
+  <g fill="none" stroke="#9bb6c7" stroke-linecap="round" opacity=".16">
+    <path d="M75 175c95-38 176-38 251 0m-222 35c66-24 123-24 174 0" stroke-width="2"/>
+    <path d="M1250 360c95-38 176-38 251 0m-222 35c66-24 123-24 174 0" stroke-width="2"/>
+  </g>
+  <g fill="#263e50" stroke="#7894a7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".48">
+    <path d="M125 305h178a55 55 0 0 0 0-110 77 77 0 0 0-147-14 62 62 0 0 0-31 124Z"/>
+    <path d="M1240 570h183a57 57 0 0 0 0-114 80 80 0 0 0-153-15 64 64 0 0 0-30 129Z"/>
+  </g>
+  <g transform="translate(1270 145)" fill="none" stroke="#b7cbd8" stroke-linecap="round" opacity=".58">
+    <path d="M20-53a55 55 0 1 1-51-72 43 43 0 0 0 51 72Z" fill="#d6e5ec" fill-opacity=".62" stroke="none"/>
+    <circle r="67" stroke-width="2" opacity=".25"/>
+  </g>
+  <g fill="none" stroke="#8ba9bc" stroke-linecap="round" opacity=".2">
+    <path d="M80 690c158-58 290-58 396 0m-332 43c100-35 183-35 249 0" stroke-width="3"/>
+    <path d="M1110 820c158-58 290-58 396 0m-332 43c100-35 183-35 249 0" stroke-width="3"/>
+  </g>
+  <path d="M0 850c212-88 403-66 589-10 173 52 326 58 493-2 193-69 351-53 518 17v145H0Z" fill="url(#horizon)"/>
+</svg>

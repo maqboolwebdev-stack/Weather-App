@@ -26,8 +26,17 @@ body {
     min-height: 100dvh;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: var(--page-background);
+    background-image: url("./assets/icons/weather-background-light.svg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     color: var(--text-color);
     transition: background-color 180ms ease, color 180ms ease;
+}
+
+:root[data-theme="dark"] body {
+    background-image: url("./assets/icons/weather-background-dark.svg");
 }
 
 ::view-transition-old(root),
