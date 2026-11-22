@@ -48,7 +48,6 @@ export function renderWeatherCard(data) {
 
   const feelsLikeP = document.createElement("p");
   feelsLikeP.className = "feels-like";
-  feelsLikeP.textContent = `Feels like ${data.feelsLike}°`;
 
   cardHeader.appendChild(locationH1);
   cardHeader.appendChild(dateTimeP);
@@ -59,7 +58,53 @@ export function renderWeatherCard(data) {
 
   const tempH2 = document.createElement("h2");
   tempH2.className = "temperature";
-  tempH2.textContent = `${data.temperature}°C`;
+
+  const temperatureDisplay = document.createElement("div");
+  temperatureDisplay.className = "temperature-display";
+
+  const unitToggle = document.createElement("div");
+  unitToggle.className = "temperature-unit-toggle";
+  unitToggle.setAttribute("aria-label", "Temperature unit");
+
+  const celsiusButton = document.createElement("button");
+  celsiusButton.className = "temperature-unit";
+  celsiusButton.type = "button";
+  celsiusButton.textContent = "°C";
+  celsiusButton.setAttribute("aria-pressed", "true");
+
+  const wallSpan = document.createElement("span");
+  wallSpan.textContent = "|";
+  wallSpan.className = 'wallSpan';
+
+
+  const fahrenheitButton = document.createElement("button");
+  fahrenheitButton.className = "temperature-unit";
+  fahrenheitButton.type = "button";
+  fahrenheitButton.textContent = "°F";
+  fahrenheitButton.setAttribute("aria-pressed", "false");
+
+  unitToggle.appendChild(celsiusButton);
+  unitToggle.appendChild(wallSpan);
+  unitToggle.appendChild(fahrenheitButton);
+  temperatureDisplay.appendChild(tempH2);
+  temperatureDisplay.appendChild(unitToggle);
+
+  function setTemperatureUnit(unit) {
+    const convert = (celsius) =>
+      unit === "F" ? (celsius * 9) / 5 + 32 : celsius;
+    const format = (celsius) => `${convert(celsius).toFixed(1)}°${unit}`;
+
+    tempH2.textContent = convert(data.temperature).toFixed(1);
+    feelsLikeP.textContent = `Feels like ${format(data.feelsLike)}`;
+
+    const isFahrenheit = unit === "F";
+    fahrenheitButton.setAttribute("aria-pressed", String(isFahrenheit));
+    celsiusButton.setAttribute("aria-pressed", String(!isFahrenheit));
+  }
+
+  celsiusButton.addEventListener("click", () => setTemperatureUnit("C"));
+  fahrenheitButton.addEventListener("click", () => setTemperatureUnit("F"));
+  setTemperatureUnit("C");
 
   const conditionP = document.createElement("p");
   conditionP.className = "condition";
@@ -69,7 +114,7 @@ export function renderWeatherCard(data) {
   descP.className = "description";
   descP.textContent = data.description;
 
-  cardMain.appendChild(tempH2);
+  cardMain.appendChild(temperatureDisplay);
   cardMain.appendChild(conditionP);
   cardMain.appendChild(descP);
 
@@ -94,8 +139,12 @@ export function renderWeatherCard(data) {
   }
 
   cardDetails.appendChild(createDetailItem("Humidity", `${data.humidity}%`));
-  cardDetails.appendChild(createDetailItem("Precipitation", `${data.perception}%`));
-  cardDetails.appendChild(createDetailItem("Wind Speed", `${data.windSpeed} km/h`));
+  cardDetails.appendChild(
+    createDetailItem("Precipitation", `${data.perception}%`),
+  );
+  cardDetails.appendChild(
+    createDetailItem("Wind Speed", `${data.windSpeed} km/h`),
+  );
 
   weatherCard.appendChild(cardHeader);
   weatherCard.appendChild(cardMain);

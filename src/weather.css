@@ -77,8 +77,43 @@ main {
   text-align: center;
 }
 
+.temperature-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
 .temperature {
   font-size: clamp(2.5rem, 8vw, 3.5rem);
+}
+
+.temperature-unit-toggle {
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+}
+
+.wallSpan {
+  color: rgb(197, 186, 186);
+  font-size: clamp(1.2rem, 2.3vw, 2rem);
+  font-weight: 100;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.temperature-unit {
+  background-color: transparent;
+  border: none;
+  padding: .3rem .1rem;
+  background: transparent;
+  color: rgb(197, 186, 186);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  cursor: pointer;
+}
+
+.temperature-unit[aria-pressed="true"] {
+  color: black;
 }
 
 .condition {
