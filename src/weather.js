@@ -16,7 +16,7 @@ async function getWeather(location) {
   }
 }
 
-function filterData(rawData) {
+function filterData(rawData, locationName) {
   const temperature = rawData.days[0].temp;
   const conditions = rawData.days[0].conditions;
   const description = rawData.days[0].description;
@@ -24,7 +24,7 @@ function filterData(rawData) {
   const humidity = rawData.days[0].humidity;
   const perception = rawData.days[0].precip;
   const windSpeed = rawData.days[0].windspeed;
-  const resolveAddress = rawData.resolvedAddress;
+  const resolveAddress = locationName || rawData.resolvedAddress;
   const feelsLike = rawData.currentConditions.feelslike;
 
   return {
