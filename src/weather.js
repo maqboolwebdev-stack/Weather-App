@@ -4,10 +4,15 @@ async function getWeather(location) {
   try {
     const API_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?key=${API_KEY}&unitGroup=metric&contentType=json`;
     const response = await fetch(API_URL);
+    if (!response.ok) {
+      throw new Error("Location not found. Please check the city name.");
+    }
+
     const data = await response.json();
     return data;
   } catch (error) {
     console.error("Problem with fetching data:", error);
+    throw error;
   }
 }
 

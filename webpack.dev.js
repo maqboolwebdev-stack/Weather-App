@@ -6,6 +6,10 @@ export default merge(common, {
 
   devtool: "eval-source-map",
 
+  output: {
+    publicPath: "/",
+  },
+
   devServer: {
     watchFiles: ["./src/template.html"],
   },

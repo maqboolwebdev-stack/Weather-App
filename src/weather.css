@@ -4,6 +4,42 @@ main {
   padding: 1rem;
 }
 
+.loading,
+.weather-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 10rem;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.25rem solid rgba(128, 128, 128, 0.35);
+  border-top-color: green;
+  border-radius: 50%;
+  animation: loading-spin 0.8s linear infinite;
+}
+
+.loading-text {
+  margin: 0;
+  font-weight: 600;
+}
+
+.weather-error {
+  color: #a00;
+  font-weight: 600;
+}
+
+@keyframes loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .weather-card {
   width: 100%;
   max-width: 22rem;

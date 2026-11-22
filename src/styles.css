@@ -1,7 +1,6 @@
 body {
     min-height: 100dvh;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    /* background-color: lightblue; */
 }
 
 header {
@@ -46,4 +45,9 @@ header {
 
 .search-btn:active {
     opacity: .80;
+}
+
+.search-btn:disabled {
+    cursor: wait;
+    opacity: 0.6;
 }

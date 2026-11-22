@@ -1,3 +1,32 @@
+export function renderLoading() {
+  const mainContainer = document.querySelector("main");
+  mainContainer.innerHTML = "";
+
+  const loading = document.createElement("div");
+  loading.className = "loading";
+
+  const spinner = document.createElement("div");
+  spinner.className = "loading-spinner";
+
+  const loadingText = document.createElement("p");
+  loadingText.className = "loading-text";
+  loadingText.textContent = "Loading weather...";
+
+  loading.appendChild(spinner);
+  loading.appendChild(loadingText);
+  mainContainer.appendChild(loading);
+}
+
+export function renderError(message) {
+  const mainContainer = document.querySelector("main");
+  mainContainer.innerHTML = "";
+
+  const errorContainer = document.createElement("div");
+  errorContainer.className = "weather-error";
+  errorContainer.textContent = message;
+  mainContainer.appendChild(errorContainer);
+}
+
 export function renderWeatherCard(data) {
   const mainContainer = document.querySelector("main");
 
