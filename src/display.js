@@ -1,4 +1,4 @@
-import { getWeather, filterData } from "./weather.js";
+import { getWeather, filterData, filterForecast } from "./weather.js";
 import {
   renderWeatherCard,
   renderLoading,
@@ -34,7 +34,10 @@ async function showWeather(
     const rawData = await getWeather(location);
     if (requestId !== activeRequest) return;
 
-    renderWeatherCard(filterData(rawData, locationName));
+    renderWeatherCard(
+      filterData(rawData, locationName),
+      filterForecast(rawData),
+    );
   } catch (error) {
     if (requestId !== activeRequest) return;
 

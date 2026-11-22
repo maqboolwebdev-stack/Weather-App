@@ -1,3 +1,21 @@
+import clearIcon from "./assets/icons/weather-sun.svg";
+import cloudyIcon from "./assets/icons/weather-cloud.svg";
+import partlyCloudyIcon from "./assets/icons/weather-partly-cloudy.svg";
+import rainIcon from "./assets/icons/weather-rain.svg";
+import thunderstormIcon from "./assets/icons/weather-thunderstorm.svg";
+import snowIcon from "./assets/icons/weather-snow.svg";
+import fogIcon from "./assets/icons/weather-fog.svg";
+
+const forecastIcons = {
+  clear: clearIcon,
+  cloudy: cloudyIcon,
+  partlyCloudy: partlyCloudyIcon,
+  rain: rainIcon,
+  thunderstorm: thunderstormIcon,
+  snow: snowIcon,
+  fog: fogIcon,
+};
+
 export function renderLoading() {
   const mainContainer = document.querySelector("main");
   mainContainer.innerHTML = "";
@@ -27,7 +45,30 @@ export function renderError(message) {
   mainContainer.appendChild(errorContainer);
 }
 
-export function renderWeatherCard(data) {
+function getForecastIcon(iconName, conditions) {
+  const iconType = `${iconName || ""} ${conditions || ""}`.toLowerCase();
+
+  if (/thunder|storm/.test(iconType)) {
+    return forecastIcons.thunderstorm;
+  }
+
+  if (/snow|hail|sleet|ice/.test(iconType)) return forecastIcons.snow;
+  if (/rain|shower|drizzle/.test(iconType)) return forecastIcons.rain;
+  if (/fog|mist/.test(iconType)) return forecastIcons.fog;
+  if (/partly/.test(iconType)) return forecastIcons.partlyCloudy;
+  if (/overcast|cloud/.test(iconType)) return forecastIcons.cloudy;
+  return forecastIcons.clear;
+}
+
+function createForecastIcon(iconName, conditions) {
+  const icon = document.createElement("img");
+  icon.className = "forecast-icon";
+  icon.src = getForecastIcon(iconName, conditions);
+  icon.alt = conditions || "Weather";
+  return icon;
+}
+
+export function renderWeatherCard(data, forecast = []) {
   const mainContainer = document.querySelector("main");
 
   mainContainer.innerHTML = "";
@@ -96,6 +137,8 @@ export function renderWeatherCard(data) {
   temperatureDisplay.appendChild(tempH2);
   temperatureDisplay.appendChild(unitToggle);
 
+  let updateForecastTemperatures = () => {};
+
   function setTemperatureUnit(unit) {
     const convert = (celsius) =>
       unit === "F" ? (celsius * 9) / 5 + 32 : celsius;
@@ -107,6 +150,7 @@ export function renderWeatherCard(data) {
     const isFahrenheit = unit === "F";
     fahrenheitButton.setAttribute("aria-pressed", String(isFahrenheit));
     celsiusButton.setAttribute("aria-pressed", String(!isFahrenheit));
+    updateForecastTemperatures(unit);
   }
 
   celsiusButton.addEventListener("click", () => setTemperatureUnit("C"));
@@ -158,4 +202,57 @@ export function renderWeatherCard(data) {
   weatherCard.appendChild(cardDetails);
 
   mainContainer.appendChild(weatherCard);
+
+  if (forecast.length) {
+    const forecastSection = document.createElement("section");
+    forecastSection.className = "forecast-section";
+
+    const forecastHeading = document.createElement("h2");
+    forecastHeading.className = "forecast-heading";
+    forecastHeading.textContent = "5-Day Forecast";
+
+    const forecastCards = document.createElement("div");
+    forecastCards.className = "forecast-cards";
+    const forecastTemperatures = [];
+
+    forecast.forEach((day, index) => {
+      const forecastCard = document.createElement("article");
+      forecastCard.className = "forecast-card";
+
+      const dayName = document.createElement("h3");
+      dayName.className = "forecast-day";
+      const forecastDate = new Date(`${day.dateTime}T00:00:00`);
+      dayName.textContent = Number.isNaN(forecastDate.getTime())
+        ? `Day ${index + 1}`
+        : forecastDate.toLocaleDateString("en-US", { weekday: "short" });
+
+      const forecastIcon = createForecastIcon(day.icon, day.conditions);
+
+      const temperatures = document.createElement("p");
+      temperatures.className = "forecast-temperatures";
+      forecastTemperatures.push({
+        element: temperatures,
+        high: day.high,
+        low: day.low,
+      });
+
+      forecastCard.appendChild(dayName);
+      forecastCard.appendChild(forecastIcon);
+      forecastCard.appendChild(temperatures);
+      forecastCards.appendChild(forecastCard);
+    });
+
+    updateForecastTemperatures = (unit) => {
+      const convert = (celsius) =>
+        unit === "F" ? (celsius * 9) / 5 + 32 : celsius;
+      forecastTemperatures.forEach(({ element, high, low }) => {
+        element.textContent = `${convert(high).toFixed(0)}° / ${convert(low).toFixed(0)}°`;
+      });
+    };
+    updateForecastTemperatures("C");
+
+    forecastSection.appendChild(forecastHeading);
+    forecastSection.appendChild(forecastCards);
+    mainContainer.appendChild(forecastSection);
+  }
 }

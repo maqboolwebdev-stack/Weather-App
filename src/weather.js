@@ -40,5 +40,14 @@ function filterData(rawData, locationName) {
   };
 }
 
+function filterForecast(rawData) {
+  return rawData.days.slice(1, 6).map((day) => ({
+    dateTime: day.datetime,
+    high: day.tempmax,
+    low: day.tempmin,
+    icon: day.icon,
+    conditions: day.conditions,
+  }));
+}
 
-export {getWeather, filterData};
+export {getWeather, filterData, filterForecast};
