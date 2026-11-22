@@ -44,7 +44,14 @@ export function renderWeatherCard(data) {
 
   const dateTimeP = document.createElement("p");
   dateTimeP.className = "date-time";
-  dateTimeP.textContent = data.dateTime;
+  const date = new Date(`${data.dateTime}T00:00:00`);
+  dateTimeP.textContent = Number.isNaN(date.getTime())
+    ? data.dateTime
+    : date.toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "short",
+        day: "numeric",
+      });
 
   const feelsLikeP = document.createElement("p");
   feelsLikeP.className = "feels-like";
