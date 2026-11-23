@@ -1,7 +1,7 @@
 :root {
     color-scheme: light;
+    --layout-content-width: 56rem;
     --page-background: hsl(220 14% 96%);
-    --surface-background: hsl(0 0% 100%);
     --text-color: hsl(221 39% 11%);
     --muted-color: hsl(220 9% 46%);
     --border-color: hsl(218 11% 65%);
@@ -13,7 +13,6 @@
 :root[data-theme="dark"] {
     color-scheme: dark;
     --page-background: hsl(221 39% 11%);
-    --surface-background: hsl(215 28% 17%);
     --text-color: hsl(0, 0%, 100%);
     --muted-color: hsl(214 14% 84%);
     --border-color: hsl(220 9% 46%);
@@ -73,27 +72,35 @@ body {
 }
 
 header {
-    height: 5rem;
+    width: min(var(--layout-content-width), calc(100% - 2rem));
+    min-height: 5rem;
+    margin-inline: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+header form {
+    width: 100%;
 }
 
 .search-container {
     display: flex;
-    width: auto;
-    justify-content: center;
+    width: 100%;
     align-items: center;
-    gap: 1rem;
+    gap: clamp(.5rem, 1.5vw, 1rem);
 }
 
 .search-field {
-    border-radius: 2px;
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    height: 3rem;
+    border-radius: .75rem;
     border: 1px solid var(--border-color);
-    padding-left: .5rem;
-    background-color: var(--surface-background);
+    padding-inline: .85rem;
+    background-color: transparent;
     color: var(--text-color);
-
 }
 
 .search-field:focus {
@@ -102,12 +109,16 @@ header {
 }
 
 .search-btn {
+    flex: 0 0 auto;
+    min-width: 5rem;
+    height: 3rem;
     cursor: pointer;
     border: 1px solid var(--border-color);
-    background-color: var(--surface-background);
+    border-radius: .75rem;
     color: var(--text-color);
-    padding-left: .5rem;
-    padding-right: .5rem;
+    background-color: transparent;
+    padding-inline: 1rem;
+    font-size: clamp(.85rem, 2vw, 1rem);
 }
 
 .search-btn:hover {
@@ -125,14 +136,15 @@ header {
 }
 
 .theme-toggle {
+    flex: 0 0 auto;
     display: grid;
     place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    padding: 0.35rem;
+    width: clamp(2.4rem, 7vw, 2.75rem);
+    height: clamp(2.4rem, 7vw, 2.75rem);
+    padding: clamp(.4rem, 1.5vw, .55rem);
     border: 1px solid var(--border-color);
     border-radius: 50%;
-    background-color: var(--surface-background);
+    background-color: transparent;
     color: var(--text-color);
     cursor: pointer;
 }
@@ -145,4 +157,35 @@ header {
     width: 100%;
     height: 100%;
     filter: var(--icon-filter);
+}
+
+@media (min-width: 40.01rem) and (max-width: 64rem) {
+    .search-field {
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 32rem) {
+    header {
+        width: calc(100% - 1rem);
+    }
+
+    .search-container {
+        gap: .45rem;
+    }
+
+    .search-field,
+    .search-btn {
+        height: 2.75rem;
+    }
+
+    .search-field {
+        padding-inline: .65rem;
+    }
+
+    .search-btn {
+        min-width: 4.25rem;
+        padding-inline: .65rem;
+        font-size: .85rem;
+    }
 }
