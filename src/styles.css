@@ -38,6 +38,27 @@ body {
     background-image: url("./assets/icons/weather-background-dark.svg");
 }
 
+@media (min-width: 426px) and (max-width: 768px) {
+    body {
+        background-image: url("./assets/icons/weather-background-tablet-light.svg");
+    }
+
+    :root[data-theme="dark"] body {
+        background-image: url("./assets/icons/weather-background-tablet-dark.svg");
+    }
+}
+
+@media (max-width: 425px) {
+    body {
+        background-image: url("./assets/icons/weather-background-mobile-light.svg");
+        background-attachment: scroll;
+    }
+
+    :root[data-theme="dark"] body {
+        background-image: url("./assets/icons/weather-background-mobile-dark.svg");
+    }
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
     animation: none;
