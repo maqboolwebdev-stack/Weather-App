@@ -200,6 +200,22 @@ main {
   font-weight: bold;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .temperature-unit {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border-radius: 50%;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 120ms ease, background-color 120ms ease;
+  }
+
+  .temperature-unit:active {
+    transform: scale(0.94);
+    background-color: var(--surface-background);
+  }
+}
+
 .condition {
   font-size: clamp(1rem, 3vw, 1.2rem);
   font-weight: 500;

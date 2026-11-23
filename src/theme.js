@@ -3,6 +3,7 @@ import sunIcon from "./assets/icons/sun.svg";
 
 const themeToggle = document.querySelector(".theme-toggle");
 const themeIcon = themeToggle.querySelector(".theme-toggle-icon");
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 const storageKey = "weather-app-theme";
 
 function getLocalTimeTheme() {
@@ -13,6 +14,9 @@ function getLocalTimeTheme() {
 function applyTheme(theme) {
   const isDark = theme === "dark";
   document.documentElement.dataset.theme = theme;
+  if (themeColorMeta) {
+    themeColorMeta.content = isDark ? "#101b2c" : "#f8fbff";
+  }
   themeIcon.src = isDark ? sunIcon : moonIcon;
   themeToggle.setAttribute(
     "aria-label",

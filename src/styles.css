@@ -180,6 +180,33 @@ header form {
     filter: var(--icon-filter);
 }
 
+@media (hover: none) and (pointer: coarse) {
+    button,
+    a {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    input {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    .search-btn,
+    .theme-toggle {
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+        transition: transform 120ms ease, background-color 120ms ease;
+    }
+
+    .search-btn:active,
+    .theme-toggle:active {
+        transform: scale(0.96);
+    }
+}
+
 @media (min-width: 40.01rem) and (max-width: 64rem) {
     .search-field {
         flex-grow: 1;
