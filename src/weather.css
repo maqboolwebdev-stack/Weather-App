@@ -56,16 +56,27 @@ main {
 .weather-card__top {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(12rem, 0.9fr);
-  gap: 1.5rem;
+  /* gap: 1.5rem; */
   align-items: stretch;
 }
 
 .weather-card__current {
   min-width: 0;
+  border: 1px solid red;
+
 }
 
-.weather-card__extra {
+.weather-card__condition-gif {
   min-height: 14rem;
+  border: 1px solid red;
+  overflow: hidden;
+}
+
+.weather-card__condition-gif-image {
+  display: block;
+  width: 100%;
+  height: 19rem;
+  object-fit: cover;
 }
 
 .forecast-section {
@@ -242,8 +253,12 @@ main {
     gap: 1rem;
   }
 
-  .weather-card__extra {
+  .weather-card__condition-gif {
     min-height: 5rem;
+  }
+
+  .weather-card__condition-gif-image {
+    height: 5rem;
   }
 
   .forecast-cards {

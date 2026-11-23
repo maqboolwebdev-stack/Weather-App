@@ -221,11 +221,11 @@ export function renderWeatherCard(data, forecast = []) {
   currentWeather.appendChild(cardMain);
   currentWeather.appendChild(cardDetails);
 
-  const extraContent = document.createElement("div");
-  extraContent.className = "weather-card__extra";
+  const conditionGifContainer = document.createElement("div");
+  conditionGifContainer.className = "weather-card__condition-gif";
 
   cardTop.appendChild(currentWeather);
-  cardTop.appendChild(extraContent);
+  cardTop.appendChild(conditionGifContainer);
   weatherCard.appendChild(cardTop);
 
   if (forecast.length) {

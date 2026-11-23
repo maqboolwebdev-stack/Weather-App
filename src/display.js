@@ -5,10 +5,42 @@ import {
   renderError,
 } from "./render-weather-card.js";
 import { setAutomaticThemeFromSunTimes } from "./theme.js";
+import { getConditionGif } from "./giphy.js";
 
 const input = document.querySelector("input");
 const searchBtn = document.querySelector("button");
 let activeRequest = 0;
+
+async function loadConditionGif(condition, requestId) {
+  try {
+    const gifUrl = await getConditionGif(condition);
+    if (!gifUrl || requestId !== activeRequest) return;
+
+    const container = document.querySelector(".weather-card__condition-gif");
+    if (!container) return;
+
+    const image = document.createElement("img");
+    image.className = "weather-card__condition-gif-image";
+    image.alt = `${condition} weather animation`;
+    image.addEventListener(
+      "load",
+      () => {
+        if (requestId === activeRequest && container.isConnected) {
+          container.replaceChildren(image);
+        }
+      },
+      { once: true },
+    );
+    image.addEventListener(
+      "error",
+      () => console.warn("Could not display the weather condition GIF."),
+      { once: true },
+    );
+    image.src = gifUrl;
+  } catch (error) {
+    console.warn("Could not load a weather condition GIF.", error);
+  }
+}
 
 function getUserFriendlyError(error, location) {
   const message = error instanceof Error ? error.message : "";
@@ -59,10 +91,9 @@ async function showWeather(
       );
     }
 
-    renderWeatherCard(
-      filterData(rawData, locationName),
-      filterForecast(rawData),
-    );
+    const weatherData = filterData(rawData, locationName);
+    renderWeatherCard(weatherData, filterForecast(rawData));
+    void loadConditionGif(weatherData.conditions, requestId);
   } catch (error) {
     if (requestId !== activeRequest) return;
 
