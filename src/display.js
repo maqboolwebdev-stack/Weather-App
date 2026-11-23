@@ -10,6 +10,20 @@ const input = document.querySelector("input");
 const searchBtn = document.querySelector("button");
 let activeRequest = 0;
 
+function getUserFriendlyError(error, location) {
+  const message = error instanceof Error ? error.message : "";
+
+  if (/location not found/i.test(message)) {
+    return `We couldn't find "${location}". Check the name and try again.`;
+  }
+
+  if (/failed to fetch|networkerror|load failed/i.test(message)) {
+    return "We couldn't connect to get the weather. Check your internet connection and try again.";
+  }
+
+  return "We couldn't load the weather. Please try again.";
+}
+
 async function getIpCity() {
   const response = await fetch("https://ipwho.is/");
   if (!response.ok) {
@@ -52,7 +66,7 @@ async function showWeather(
   } catch (error) {
     if (requestId !== activeRequest) return;
 
-    renderError(error.message || "Weather data could not be loaded.");
+    renderError(getUserFriendlyError(error, locationName || location));
   }
 }
 
