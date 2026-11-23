@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 1024" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#101b2c"/>
+      <stop offset=".55" stop-color="#17283a"/>
+      <stop offset="1" stop-color="#203749"/>
+    </linearGradient>
+    <radialGradient id="moon-glow">
+      <stop offset="0" stop-color="#a8c9dc" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#a8c9dc" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="horizon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#28485b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#28485b" stop-opacity=".68"/>
+    </linearGradient>
+  </defs>
+  <rect width="768" height="1024" fill="url(#sky)"/>
+  <circle cx="620" cy="145" r="245" fill="url(#moon-glow)"/>
+  <g fill="#d4e5ef" opacity=".48">
+    <circle cx="510" cy="105" r="2.5"/><circle cx="704" cy="260" r="2"/>
+    <circle cx="440" cy="238" r="2.5"/><circle cx="675" cy="470" r="2"/>
+    <circle cx="326" cy="150" r="2"/>
+  </g>
+  <g fill="none" stroke="#9bb6c7" stroke-linecap="round" opacity=".16">
+    <path d="M44 195c74-30 139-30 195 0m-164 28c51-19 96-19 137 0" stroke-width="2"/>
+    <path d="M490 380c79-30 146-30 202 0m-168 28c51-19 96-19 137 0" stroke-width="2"/>
+    <path d="M60 730c110-38 198-38 266 0m-224 31c70-24 128-24 174 0" stroke-width="3"/>
+  </g>
+  <g fill="#263e50" stroke="#7894a7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".48">
+    <path d="M82 370h153a47 47 0 0 0 0-94 66 66 0 0 0-126-12 53 53 0 0 0-27 106Z"/>
+    <path d="M442 620h178a54 54 0 0 0 0-108 76 76 0 0 0-145-14 60 60 0 0 0-33 122Z"/>
+  </g>
+  <g transform="translate(620 145)" fill="none" stroke="#b7cbd8" stroke-linecap="round" opacity=".5">
+    <path d="M17-41a43 43 0 1 1-41-57 34 34 0 0 0 41 57Z" fill="#d6e5ec" fill-opacity=".62" stroke="none"/>
+    <circle r="56" stroke-width="2" opacity=".22"/>
+  </g>
+  <path d="M0 870c128-54 240-42 350-5 114 38 205 35 311-8 43-17 79-23 107-19v186H0Z" fill="url(#horizon)"/>
+</svg>
