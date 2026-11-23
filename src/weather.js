@@ -21,6 +21,7 @@ function filterData(rawData, locationName) {
   const conditions = rawData.days[0].conditions;
   const description = rawData.days[0].description;
   const dateTime = rawData.days[0].datetime;
+  const timezone = rawData.timezone;
   const humidity = rawData.days[0].humidity;
   const perception = rawData.days[0].precip;
   const windSpeed = rawData.days[0].windspeed;
@@ -32,6 +33,7 @@ function filterData(rawData, locationName) {
     conditions,
     description,
     dateTime,
+    timezone,
     humidity,
     perception,
     windSpeed,

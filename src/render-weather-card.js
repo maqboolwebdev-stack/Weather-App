@@ -86,13 +86,28 @@ export function renderWeatherCard(data, forecast = []) {
   const dateTimeP = document.createElement("p");
   dateTimeP.className = "date-time";
   const date = new Date(`${data.dateTime}T00:00:00`);
-  dateTimeP.textContent = Number.isNaN(date.getTime())
+  const dateText = Number.isNaN(date.getTime())
     ? data.dateTime
     : date.toLocaleDateString("en-US", {
         weekday: "long",
         month: "short",
         day: "numeric",
       });
+  let localTimeText = "";
+  if (data.timezone) {
+    try {
+      localTimeText = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        timeZone: data.timezone,
+      }).format(new Date());
+    } catch (error) {
+      if (!(error instanceof RangeError)) throw error;
+    }
+  }
+  dateTimeP.textContent = localTimeText
+    ? `${dateText} | ${localTimeText}`
+    : dateText;
 
   const feelsLikeP = document.createElement("p");
   feelsLikeP.className = "feels-like";
