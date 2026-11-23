@@ -212,11 +212,21 @@ export function renderWeatherCard(data, forecast = []) {
     createDetailItem("Wind Speed", `${data.windSpeed} km/h`),
   );
 
-  weatherCard.appendChild(cardHeader);
-  weatherCard.appendChild(cardMain);
-  weatherCard.appendChild(cardDetails);
+  const cardTop = document.createElement("div");
+  cardTop.className = "weather-card__top";
 
-  mainContainer.appendChild(weatherCard);
+  const currentWeather = document.createElement("div");
+  currentWeather.className = "weather-card__current";
+  currentWeather.appendChild(cardHeader);
+  currentWeather.appendChild(cardMain);
+  currentWeather.appendChild(cardDetails);
+
+  const extraContent = document.createElement("div");
+  extraContent.className = "weather-card__extra";
+
+  cardTop.appendChild(currentWeather);
+  cardTop.appendChild(extraContent);
+  weatherCard.appendChild(cardTop);
 
   if (forecast.length) {
     const forecastSection = document.createElement("section");
@@ -268,6 +278,8 @@ export function renderWeatherCard(data, forecast = []) {
 
     forecastSection.appendChild(forecastHeading);
     forecastSection.appendChild(forecastCards);
-    mainContainer.appendChild(forecastSection);
+    weatherCard.appendChild(forecastSection);
   }
+
+  mainContainer.appendChild(weatherCard);
 }
